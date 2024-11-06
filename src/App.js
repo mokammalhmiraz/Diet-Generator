@@ -1,10 +1,52 @@
 import "./App.css";
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import Home from "./home";
-import Profile from "./profile";
-import Login from "./login";
+import { BrowserRouter as Router, Routes, Route, Link,createRoutesFromElements,createBrowserRouter,Route,RouterProvider } from "react-router-dom";
+import Home from "./layout/pages/home";
+import Profile from "./layout/pages/profile";
+import Login from "./layout/pages/login";
 // import Career from "./Career";
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route>
+      <Route
+      path="/"
+      element={<RootLayouts/>}
+        >
+          <Route
+      path="/"
+      element={<Home/>}
+        ></Route>
+        <Route
+      path="/shop"
+      element={<SlickSlider/>}
+        ></Route>
+        <Route
+      path="/contacts"
+      element={<Contacts/>}
+        ></Route>
+        <Route
+      path="/login"
+      element={<Login/>}
+        ></Route>
+        <Route
+      path="/checkout"
+      element={<Checkout/>}
+        ></Route>
+        <Route
+      path="/shop"
+      element={<SlickSlider/>}
+        ></Route>
+        <Route
+      path="/sign-up"
+      element={<Signup/>}
+        ></Route>
+        <Route
+      path="*"
+      element={<Errorpage/>}
+        ></Route>
+        </Route>
+    </Route>
+  ))
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -14,6 +56,9 @@ function App() {
     setIsAuthenticated(authStatus === "true");
   }, []);
   return (
+    
+    <>
+     <RouterProvider router={router}/>
     <Router>
       <div>
         <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -72,27 +117,7 @@ function App() {
         <div className="App">
           {isAuthenticated ? (
             <>
-              <nav className="navbar navbar-expand-lg navbar-light bg-light">
-                <div className="container">
-                  <Link className="navbar-brand" to="/home">
-                    MySite
-                  </Link>
-                  <div className="collapse navbar-collapse">
-                    <ul className="navbar-nav ml-auto">
-                      <li className="nav-item">
-                        <Link className="nav-link" to="/home">
-                          Home
-                        </Link>
-                      </li>
-                      <li className="nav-item">
-                        <Link className="nav-link" to="/profile">
-                          Profile
-                        </Link>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </nav>
+              
 
               <div className="container mt-4">
                 <Routes>
@@ -114,6 +139,7 @@ function App() {
         </div>
       </div>
     </Router>
+    </>
   );
 }
 
