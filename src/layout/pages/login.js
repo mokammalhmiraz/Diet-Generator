@@ -1,10 +1,14 @@
 // src/Login.js
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
+import { FaUser } from "react-icons/fa";
+import { IoIosEyeOff, IoIosEye } from "react-icons/io";
+import "./login.css";
 
 function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);  // Define showPassword state
   const navigate = useNavigate();
 
   const handleLogin = (e) => {
@@ -18,31 +22,71 @@ function Login() {
     }
   };
 
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
-    <div className="container mt-5">
-      <h2>Login</h2>
-      <form onSubmit={handleLogin}>
-        <div className="mb-3">
-          <label className="form-label">Username</label>
-          <input
-            type="text"
-            className="form-control"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
+    <>
+      <div className="banner">
+        <div className="container">
+          <div className="mainwrap">
+            <h2>DIET GENERATOR</h2>
+            <div className="login_area">
+              <h4>SIGN IN</h4>
+              <form onSubmit={handleLogin}>
+                <div className="name mb-3" style={{ position: 'relative' }}>
+                  <input
+                    type="text"
+                    className="form-control"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    placeholder="Username"
+                  />
+                  <FaUser style={{ position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)', cursor: 'pointer' }} />
+                </div>
+                <div className="password mb-3" style={{ position: 'relative' }}>
+                  <input
+                    type={showPassword ? 'text' : 'password'}
+                    className="form-control"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="Password"
+                  />
+                  {showPassword ? (
+                    <IoIosEye
+                      onClick={togglePasswordVisibility}
+                      style={{ position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)', cursor: 'pointer' }}
+                    />
+                  ) : (
+                    <IoIosEyeOff
+                      onClick={togglePasswordVisibility}
+                      style={{ position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)', cursor: 'pointer' }}
+                    />
+                  )}
+                </div>
+                <div className="mb-3">
+                  <label className="remember" style={{ cursor: 'pointer' }}>
+                    <input type="checkbox" />
+                    <span>Remember Me</span>
+                  </label>
+                  <div className="forget">
+                    Forget Password? <span>Reset</span>
+                  </div>
+                </div>
+                <div className="wrap">
+                  <button type="submit" className="btn submit_btn">Login</button>
+                  <div className="register">
+                    <span>Don't have an account? </span>
+                    <Link className="nav-link" to="/register">Sign Up</Link>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
         </div>
-        <div className="mb-3">
-          <label className="form-label">Password</label>
-          <input
-            type="password"
-            className="form-control"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-        <button type="submit" className="btn btn-primary">Login</button>
-      </form>
-    </div>
+      </div>
+    </>
   );
 }
 
