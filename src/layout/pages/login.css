@@ -28,6 +28,15 @@
 .banner .login_area h4{
     text-align: center;
 }
+.banner .login_area .name{
+    width: 100%;
+}
+.banner .login_area .password{
+    width: 100%;
+}
+.banner .login_area .check{
+    width: 100%;
+}
 .banner .login_area .name input{
     border: none;
     background: transparent;

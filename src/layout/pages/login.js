@@ -65,7 +65,7 @@ function Login() {
                     />
                   )}
                 </div>
-                <div className="mb-3">
+                <div className="check">
                   <label className="remember" style={{ cursor: 'pointer' }}>
                     <input type="checkbox" />
                     <span>Remember Me</span>
