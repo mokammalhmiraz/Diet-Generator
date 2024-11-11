@@ -50,10 +50,10 @@ export const landing = () => {
                     eating simple and enjoyable!
                   </p>
                   <div className="wrap">
-                    <Link className="signin nav-link" to="/home">
+                    <Link className="signin nav-link" to="/register">
                       Sign In
                     </Link>
-                    <Link className="started nav-link" to="/profile">
+                    <Link className="started nav-link" to="/register">
                       Get Started
                     </Link>
                   </div>

@@ -37,30 +37,49 @@
 .banner .login_area .check{
     width: 100%;
 }
+.banner .login_area input:focus {
+    outline: none;
+    border: 1px solid transparent;
+}
+.banner .login_area .name {
+    border-bottom: 1px solid #292929;
+    padding-right: 10px;
+}
 .banner .login_area .name input{
     border: none;
     background: transparent;
     padding-left: 0;
-    border-bottom: 1px solid #292929;
     border-radius: 0;
     color: #444444;
     font-weight: 600;
+    margin: 0;
+}
+.banner .login_area .password {
+    border-bottom: 1px solid #292929;
+    padding-right: 10px;
 }
 .banner .login_area .password input{
     border: none;
     background: transparent;
     padding-left: 0;
-    border-bottom: 1px solid #292929;
     border-radius: 0;
     color: #444444;
     font-weight: 600;
+    margin: 0;
+}
+.banner .login_area .remember input {
+    background: #DDDDDD;
+    color: #000;
+    border: none;
+    padding: 10px 20px;
+    font-weight: 500;
+    border-radius: 15px;
+    width: auto;
+    margin: 0;
 }
 .banner .login_area .remember{
     color: #444444;
     font-weight: 600;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
 }
 .banner .login_area .remember span{
     padding-left: 5px;

@@ -20,7 +20,6 @@ const diet = () => {
                                 <input type="number" placeholder='Height (cm)'/>
                                 <input type="number" placeholder='Weight (kg)'/>
                                 <input type="number" placeholder='Target Weight (kg)'/>
-                                <input type="text" placeholder='Diabetics'/>
                                 <select name="diabetics">
                                     <option value="">Diabetics</option>
                                     <option value="type_1">Type 1 Diabetic</option>
@@ -28,6 +27,11 @@ const diet = () => {
                                     <option value="pre_diabetic">Pre-Diabetic</option>
                                     <option value="none">None</option>
                                 </select>
+                                <div className='d-flex justify-content-end w-100'>
+                                    <div className="btn btn-warning">
+                                        Generate
+                                    </div>
+                                </div>
                             </form>
                         </div>
                     </div>

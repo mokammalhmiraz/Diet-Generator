@@ -23,7 +23,7 @@ function Home() {
                       eating simple and enjoyable!
                     </p>
                     <div className="wrap">
-                      <Link className="started nav-link" to="/profile">
+                      <Link className="started nav-link" to="/diet">
                         Start Your Journey
                       </Link>
                     </div>

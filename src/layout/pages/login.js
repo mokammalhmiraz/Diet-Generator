@@ -35,7 +35,7 @@ function Login() {
             <div className="login_area">
               <h4>SIGN IN</h4>
               <form onSubmit={handleLogin}>
-                <div className="name mb-3" style={{ position: 'relative' }}>
+                <div className="name mb-3 d-flex flex-row align-items-center">
                   <input
                     type="text"
                     className="form-control"
@@ -43,9 +43,10 @@ function Login() {
                     onChange={(e) => setUsername(e.target.value)}
                     placeholder="Username"
                   />
-                  <FaUser style={{ position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)', cursor: 'pointer' }} />
+                  <FaUser />
                 </div>
-                <div className="password mb-3" style={{ position: 'relative' }}>
+                
+                <div className="password mb-3 mb-3 d-flex flex-row align-items-center">
                   <input
                     type={showPassword ? 'text' : 'password'}
                     className="form-control"
@@ -56,12 +57,12 @@ function Login() {
                   {showPassword ? (
                     <IoIosEye
                       onClick={togglePasswordVisibility}
-                      style={{ position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)', cursor: 'pointer' }}
+                      
                     />
                   ) : (
                     <IoIosEyeOff
                       onClick={togglePasswordVisibility}
-                      style={{ position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)', cursor: 'pointer' }}
+                      
                     />
                   )}
                 </div>
