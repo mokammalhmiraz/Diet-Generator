@@ -4,74 +4,38 @@ import meal1 from "../../assests/images/meal-list-1.png";
 import meal2 from "../../assests/images/meal-list-2.png";
 import meal3 from "../../assests/images/meal-list-3.png";
 import meal4 from "../../assests/images/meal-list-4.png";
+import { useEffect } from "react";
+import axios from "axios";
 
 function Dashboard() {
     const [activePlan, setActivePlan] = useState(null);
+    const [plan, setPlan] = useState(null);
+    const userInfo = JSON.parse(localStorage.getItem("userinfo")) || {};
+    useEffect(() => {
+        const fetchDietData = async () => {
+            try {
+            const response = await axios.get("http://localhost:3000/api/diet/get");
+            const userId = userInfo._id; // Replace with actual user ID
+            const userDiet = response.data.find(diet => diet.userid === userId);
+            console.log(userDiet);
+            if (userDiet) {
+                // Process and display the userDiet data as needed
+                console.log(userDiet);
+                setPlan(userDiet); // Set the latest data to activePlan
+            }
+            } catch (error) {
+            console.error("Error fetching diet data:", error);
+            }
+        };
+
+        fetchDietData();
+
+        fetchDietData();
+    }, []);
     return (
         <>
             <div className="container">
                 <h3>Meal Plan</h3>
-                {/* Day Long Section */}
-                <div className="meal">
-                    <div className="day" onClick={() => setActivePlan(activePlan === "dayLong" ? null : "dayLong")}>
-                        <div className="bg">
-                            <h4>Day Long</h4>
-                        </div>
-                    </div>
-                </div>
-                {activePlan === "dayLong" && (
-                    <div>
-                    <h4>Day Long Meal Plan</h4>
-                    <div className="row">
-                        <div className="col-12">
-                            <div className="meal-plan">
-                                <div className="wrap">
-                                    <div>
-                                        <h5>Breakfast</h5>
-                                        <ul>
-                                            <li>Oatmeal with furit and nuts for fiber and protain.</li>
-                                            <li>Veggie omelet with whole-grain toast for balanced carbs and healthy fats.</li>
-                                        </ul>
-                                    </div>
-                                    <img src={meal1} alt=""/>
-                                </div>
-                                <div className="wrap">
-                                    <div>
-                                        <h5>Lunch</h5>
-                                        <ul>
-                                            <li>Oatmeal with furit and nuts for fiber and protain.</li>
-                                            <li>Veggie omelet with whole-grain toast for balanced carbs and healthy fats.</li>
-                                        </ul>
-                                    </div>
-                                    <img src={meal2} alt="" />
-                                </div>
-                                <div className="wrap">
-                                    <div>
-                                        <h5>Dinner</h5>
-                                        <ul>
-                                            <li>Oatmeal with furit and nuts for fiber and protain.</li>
-                                            <li>Veggie omelet with whole-grain toast for balanced carbs and healthy fats.</li>
-                                        </ul>
-                                    </div>
-                                    <img src={meal3} alt="" />
-                                </div>
-                                <div className="wrap">
-                                    <div>
-                                        <h5>Snacks</h5>
-                                        <ul>
-                                            <li>Oatmeal with furit and nuts for fiber and protain.</li>
-                                            <li>Veggie omelet with whole-grain toast for balanced carbs and healthy fats.</li>
-                                        </ul>
-                                    </div>
-                                    <img src={meal4} alt="" />
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-6"></div>
-                    </div>
-                </div>
-                )}
-                
                 {/* Weekly Section */}
                 <div className="weekly">
                     <div className="day" onClick={() => setActivePlan(activePlan === "weekly" ? null : "weekly")}>
@@ -86,49 +50,9 @@ function Dashboard() {
                     <div className="row">
                         <div className="col-12">
                             <div className="meal-plan">
-                                <div className="wrap">
-                                    <div>
-                                        <h5>Breakfast</h5>
-                                        <ul>
-                                            <li>Oatmeal with furit and nuts for fiber and protain.</li>
-                                            <li>Veggie omelet with whole-grain toast for balanced carbs and healthy fats.</li>
-                                        </ul>
-                                    </div>
-                                    <img src={meal1} alt=""/>
-                                </div>
-                                <div className="wrap">
-                                    <div>
-                                        <h5>Lunch</h5>
-                                        <ul>
-                                            <li>Oatmeal with furit and nuts for fiber and protain.</li>
-                                            <li>Veggie omelet with whole-grain toast for balanced carbs and healthy fats.</li>
-                                        </ul>
-                                    </div>
-                                    <img src={meal2} alt="" />
-                                </div>
-                                <div className="wrap">
-                                    <div>
-                                        <h5>Dinner</h5>
-                                        <ul>
-                                            <li>Oatmeal with furit and nuts for fiber and protain.</li>
-                                            <li>Veggie omelet with whole-grain toast for balanced carbs and healthy fats.</li>
-                                        </ul>
-                                    </div>
-                                    <img src={meal3} alt="" />
-                                </div>
-                                <div className="wrap">
-                                    <div>
-                                        <h5>Snacks</h5>
-                                        <ul>
-                                            <li>Oatmeal with furit and nuts for fiber and protain.</li>
-                                            <li>Veggie omelet with whole-grain toast for balanced carbs and healthy fats.</li>
-                                        </ul>
-                                    </div>
-                                    <img src={meal4} alt="" />
-                                </div>
+                                <p>{plan.routine}</p>
                             </div>
                         </div>
-                        <div className="col-6"></div>
                     </div>
                 </div>
                 )}

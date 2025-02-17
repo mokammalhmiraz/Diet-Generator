@@ -7,7 +7,6 @@ import "./profile.css";
 function Profile() {
   const userInfo = JSON.parse(localStorage.getItem('userinfo')) || {};
 
-  console.log('adsad',userInfo);
   const { name, username, email, phone, password } = userInfo;
   return (
     <>

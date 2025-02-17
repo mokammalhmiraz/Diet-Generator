@@ -13,18 +13,7 @@ function Register() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [showPassword, setShowPassword] = useState(false);  // Define showPassword state
-  const navigate = useNavigate();
-
-  // const handleLogin = (e) => {
-  //   e.preventDefault();
-  //   // Replace with actual login logic (e.g., API call)
-  //   if (username === 'admin' && password === 'password') {
-  //     localStorage.setItem('authenticated', true);
-  //     navigate('/home');  // Redirect to the Home page
-  //   } else {
-  //     alert('Invalid credentials');
-  //   }
-  // };
+  
   const handleRegister = async (e) => {
     e.preventDefault();
     setErrorMessage("");
