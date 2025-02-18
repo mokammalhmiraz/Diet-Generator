@@ -310,7 +310,7 @@ const Diet = () => {
       let response;
       if (userDiet) {
         response = await axios.patch(
-          `http://localhost:3000/api/diet/update/`,
+          `http://localhost:3000/api/diet/update`,
           {
         dietid: userDiet._id,
         userid: userInfo._id,
@@ -366,8 +366,10 @@ const Diet = () => {
         ],
           }
         );
-        if (response.status === 201) {
+        if (response.status === 200) {
           console.log("Diet plan saved successfully");
+          alert("Diet plan created successfully");
+          window.location.href = "/dashboard";
         } else {
           console.error("Failed to save diet plan", response.data);
         }
@@ -430,6 +432,8 @@ const Diet = () => {
         );
         if (response.status === 201) {
           console.log("Diet plan saved successfully");
+          alert("Diet plan created successfully");
+          window.location.href = "/dashboard";
         } else {
           console.error("Failed to save diet plan", response.data);
         }

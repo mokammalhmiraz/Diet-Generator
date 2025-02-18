@@ -17,10 +17,53 @@ import {
 
   ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 function Dashboard() {
-    const [loss,setLoss]=useState()
+    const [loss,setLoss]=useState('0')
     const [activePlan, setActivePlan] = useState(null);
     const [plan, setPlan] = useState(null);
-    const arr=["20","30","40","120","367"]
+    const [arr, setArr] = useState([]);
+    const [inputWeight, setInputWeight] = useState("");
+
+    const handleInputChange = (event) => {
+        setInputWeight(event.target.value);
+    }
+    const handleWeightSubmit = async () => {
+        const weight = inputWeight;
+        const newWeight = [...arr, weight];
+        setArr(newWeight);
+        setInputWeight("");
+
+        const targetWeight = plan.targetWeight; // Assuming targetWeight is part of the plan object
+        if (weight <= targetWeight) {
+            alert("Congratulations! You have reached your target weight.");
+            try {
+            const userId = userInfo._id; // Replace with actual user ID
+            const response = await axios.get("http://localhost:3000/api/diet/get");
+            const userDiet = response.data.find(diet => diet.userid === userId);
+            if (userDiet) {
+                await axios.delete(`http://localhost:3000/api/diet/delete`, {
+                data: { dietid: userDiet._id }
+                });
+            }
+            } catch (error) {
+            console.error("Error deleting diet plan:", error);
+            }
+            window.location.href = "/home";
+        }
+
+        try {
+            const userId = userInfo._id; // Replace with actual user ID
+            const response = await axios.get("http://localhost:3000/api/diet/get");
+            const userDiet = response.data.find(diet => diet.userid === userId);
+            if (userDiet) {
+                await axios.patch("http://localhost:3000/api/diet/weightupdate", {
+                    dietid: userDiet._id,
+                    weight: newWeight
+                });
+            }
+        } catch (error) {
+            console.error("Error updating weight data:", error);
+        }
+    }
     const userInfo = JSON.parse(localStorage.getItem("userinfo")) || {};
     useEffect(() => {
         const fetchDietData = async () => {
@@ -28,10 +71,9 @@ function Dashboard() {
             const response = await axios.get("http://localhost:3000/api/diet/get");
             const userId = userInfo._id; // Replace with actual user ID
             const userDiet = response.data.find(diet => diet.userid === userId);
-            console.log(userDiet);
+            setArr(userDiet.weight);
             if (userDiet) {
                 // Process and display the userDiet data as needed
-                console.log(userDiet);
                 setPlan(userDiet); // Set the latest data to activePlan
             }
             } catch (error) {
@@ -43,6 +85,12 @@ function Dashboard() {
 
         fetchDietData();
     }, []);
+    useEffect(() => {
+        if (arr.length > 1) {
+            const weightLoss = arr[0] - arr[arr.length - 1];
+            setLoss(weightLoss);
+        }
+    }, [arr]);
     const handleWeeklyClick = () => {
         window.location.href = "/weeklylist";
     };
@@ -73,22 +121,37 @@ function Dashboard() {
       }
     ],
   };
+    const handleRegenerate = async () => {
+        window.location.href = "/diet";
+    }
   
     return (
         <>
             <div className="container">
                 <div>
-                <div>
-                <Line options={options} data={data} />;
-                </div>
                     <div>
-                        <label htmlFor="">Enter Your Weight at the end of the day</label>
-                        <input type="number" />
-                        <button>Enter </button>
+                        <Line options={options} data={data} />
                     </div>
                     <div>
-                        <h3>Weight Loss</h3>
-                        <h4>{loss}</h4>
+                        {arr.length < 8 && (
+                            <>
+                                <label htmlFor="weightInput">Enter Your Weight at the end of the day</label>
+                                <input
+                                 className="input-field"
+                                    type="text"
+                                    id="weightInput"
+                                    value={inputWeight}
+                                    onChange={handleInputChange}
+                                />
+                            </>
+                        )}
+                        
+                        <button className="button" onClick={arr.length < 8 ? handleWeightSubmit : handleRegenerate}>
+                            {arr.length < 8 ? "Enter" : "Regenerate"}
+                        </button>
+                    </div>
+                    <div>
+                        <p><b>Weight Loss </b> <span>{loss}KG</span></p>
                     </div>
                 </div>
                 <h3>Meal Plan</h3>
