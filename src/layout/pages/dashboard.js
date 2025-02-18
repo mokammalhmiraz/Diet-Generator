@@ -1,15 +1,26 @@
 import React, { useState } from "react";
 import "./dashboard.css";
-import meal1 from "../../assests/images/meal-list-1.png";
-import meal2 from "../../assests/images/meal-list-2.png";
-import meal3 from "../../assests/images/meal-list-3.png";
-import meal4 from "../../assests/images/meal-list-4.png";
 import { useEffect } from "react";
 import axios from "axios";
+import {
+    Chart as ChartJS,
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    Title,
+    Tooltip,
+    Legend,
+  } from 'chart.js';
+  import { Line } from 'react-chartjs-2';
 
+
+  ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 function Dashboard() {
+    const [loss,setLoss]=useState()
     const [activePlan, setActivePlan] = useState(null);
     const [plan, setPlan] = useState(null);
+    const arr=["20","30","40","120","367"]
     const userInfo = JSON.parse(localStorage.getItem("userinfo")) || {};
     useEffect(() => {
         const fetchDietData = async () => {
@@ -35,10 +46,51 @@ function Dashboard() {
     const handleWeeklyClick = () => {
         window.location.href = "/weeklylist";
     };
+  
+    const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'top',
+      },
+      title: {
+        display: true,
+        text: 'Weight Dataset',
+      },
+    },
+  };
+    
+  const labels = ['Day 0', 'Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6','Day 7'];
 
+  const data = {
+    labels,
+    datasets: [
+      {
+        label: 'Weight Dataset',
+        data: arr,
+        borderColor: 'rgb(255, 99, 132)',
+        backgroundColor: 'rgba(255, 99, 132, 0.5)',
+      }
+    ],
+  };
+  
     return (
         <>
             <div className="container">
+                <div>
+                <div>
+                <Line options={options} data={data} />;
+                </div>
+                    <div>
+                        <label htmlFor="">Enter Your Weight at the end of the day</label>
+                        <input type="number" />
+                        <button>Enter </button>
+                    </div>
+                    <div>
+                        <h3>Weight Loss</h3>
+                        <h4>{loss}</h4>
+                    </div>
+                </div>
                 <h3>Meal Plan</h3>
                 {/* Weekly Section */}
                 <div className="weekly">
