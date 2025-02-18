@@ -132,7 +132,7 @@ const Diet = () => {
         console.log("DAY 4")
         const day4breakfast= await model.generateContent(`I am age ${age}, gender ${gender}, height ${height}cm, weight ${weight}kg, target weight ${targetWeight}. 
           Give me a Proper Plan of diet meal for day 3 breakfast. Do not give any options!!
-          Also say about the  amount food I need to intake. Do not say anything extra I have day 3 breakfast meal plan. Start it From day 4.(age ${age}, ${gender}, ${height}cm, ${weight}kg, target ${targetWeight}kg) also I am ${diabetics}..Dont say anything extra like Okay, here's a day 1 breakfast plan:
+          Also say about the  amount food I need to intake. Do not say anything extra. Start it From day 4.(age ${age}, ${gender}, ${height}cm, ${weight}kg, target ${targetWeight}kg) also I am ${diabetics}..I have day 3 breakfast meal plan. Dont say anything extra like Okay, here's a day 1 breakfast plan:
           **day 4**.directly give me the information! Just say it like this... " breakfast: oatmeals and nuts. Do not have to say day 4.just give me the breakfast."`)
           const day4bk=await day4breakfast.response.text()
           console.log(day4bk);
@@ -320,7 +320,50 @@ const Diet = () => {
         weight,
         targetWeight,
         diabetics,
-        routine: generatedText,
+        routine: [
+          {
+            day:"Day 1",
+            breakfast:day1bk,
+            lunch:day1lch,
+            dinner:day1dnr
+          },
+          {
+            day:"Day 2",
+            breakfast:day2bk,
+            lunch:day2lch,
+            dinner:day2dnr
+          },
+          {
+            day:"Day 3",
+            breakfast:day3bk,
+            lunch:day3lch,
+            dinner:day3dnr
+          },
+          {
+            day:"Day 4",
+            breakfast:day4bk,
+            lunch:day4lch,
+            dinner:day4dnr
+          },
+          {
+            day:"Day 5",
+            breakfast:day5bk,
+            lunch:day5lch,
+            dinner:day5dnr
+          },
+          {
+            day:"Day 6",
+            breakfast:day1bk,
+            lunch:day3lch,
+            dinner:day2dnr
+          },
+          {
+            day:"Day 7",
+            breakfast:day4bk,
+            lunch:day2lch,
+            dinner:day1dnr
+          },
+        ],
           }
         );
         if (response.status === 201) {
@@ -339,7 +382,50 @@ const Diet = () => {
         weight,
         targetWeight,
         diabetics,
-        routine: generatedText,
+        routine: [
+          {
+            day:"Day 1",
+            breakfast:day1bk,
+            lunch:day1lch,
+            dinner:day1dnr
+          },
+          {
+            day:"Day 2",
+            breakfast:day2bk,
+            lunch:day2lch,
+            dinner:day2dnr
+          },
+          {
+            day:"Day 3",
+            breakfast:day3bk,
+            lunch:day3lch,
+            dinner:day3dnr
+          },
+          {
+            day:"Day 4",
+            breakfast:day4bk,
+            lunch:day4lch,
+            dinner:day4dnr
+          },
+          {
+            day:"Day 5",
+            breakfast:day5bk,
+            lunch:day5lch,
+            dinner:day5dnr
+          },
+          {
+            day:"Day 6",
+            breakfast:day1bk,
+            lunch:day3lch,
+            dinner:day2dnr
+          },
+          {
+            day:"Day 7",
+            breakfast:day4bk,
+            lunch:day2lch,
+            dinner:day1dnr
+          },
+        ],
           }
         );
         if (response.status === 201) {
