@@ -17,6 +17,10 @@ import {
 
   ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 function Dashboard() {
+    const userInfo = JSON.parse(localStorage.getItem('userinfo')) || {};
+    if (!userInfo) {
+        window.location.href = "/login";
+    }
     const [loss,setLoss]=useState('0')
     const [activePlan, setActivePlan] = useState(null);
     const [plan, setPlan] = useState(null);
@@ -64,7 +68,6 @@ function Dashboard() {
             console.error("Error updating weight data:", error);
         }
     }
-    const userInfo = JSON.parse(localStorage.getItem("userinfo")) || {};
     useEffect(() => {
         const fetchDietData = async () => {
             try {

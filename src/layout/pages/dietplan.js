@@ -5,6 +5,10 @@ import axios from "axios";
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 
 const Diet = () => {
+  const userInfo = JSON.parse(localStorage.getItem('userinfo')) || {};
+    if (!userInfo) {
+        window.location.href = "/login";
+    }
   const [csvData, setCsvData] = useState(null);
   const [response, setResponse] = useState("");
   const [showdelayedtext,setShowDelayedText]=useState(false)
@@ -32,7 +36,6 @@ const Diet = () => {
   const [targetWeight, setTargetWeight] = useState("");
   const [diabetics, setDiabetics] = useState("");
 
-  const userInfo = JSON.parse(localStorage.getItem("userinfo")) || {};
   //   const { name, username, email, phone, password } = userInfo;
   // useEffect(() => {
   //   setUserid(userInfo._id);
