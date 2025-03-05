@@ -59,4 +59,4 @@ This project is primarily developed by [MD Mokammal Haque Miraz](https://github.
 This project is licensed under the MIT License.
 
 ## Contact
-For any inquiries or support, please contact [m.h.miraz26@gmail.com].
+For any inquiries or support, please contact [mail](m.h.miraz26@gmail.com).
