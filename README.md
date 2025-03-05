@@ -6,25 +6,18 @@ The `Diet Meal Generator` is a web application that helps users generate a perso
 
 ## Features
 
-Generate a personalized 7-day diet plan
-
-AI-powered meal planning using Gemini AI API
-
-User-friendly interface built with React.js
-
-Backend powered by MongoDB for data management
-
-Easy setup and deployment
+- Generate a personalized 7-day diet plan
+- AI-powered meal planning using Gemini AI API
+- User-friendly interface built with React.js
+- Backend powered by MongoDB for data management
+- Easy setup and deployment
 
 ## Technologies Used
 
-Frontend: React.js
-
-Backend: Node.js, Express.js
-
-Database: MongoDB
-
-AI Integration: Gemini AI API
+- Frontend: React.js
+- Backend: Node.js, Express.js
+- Database: MongoDB
+- AI Integration: Gemini AI API
 
 
 ## Installation
@@ -43,9 +36,9 @@ npm start
 
 ### `Start the Backend`
 Navigate to the backend folder and run:
-cd backend
-npm install
-npm start
+- cd backend
+- npm install
+- npm start
 
 ## API Integration
 This project connects to the Gemini AI API to generate meal plans. Ensure you have an API key and configure it in your `.env` file.
