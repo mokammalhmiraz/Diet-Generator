@@ -1,7 +1,5 @@
 # Diet Meal Generator
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
 ## Overview
 
 The `Diet Meal Generator` is a web application that helps users generate a personalized 7-day diet plan. It utilizes the Gemini AI API to create optimized meal plans based on user information. Users can follow their diet plan for a structured and healthier lifestyle.
